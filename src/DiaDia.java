@@ -26,7 +26,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa"};
 
 	private Partita partita;
 
@@ -43,7 +43,31 @@ public class DiaDia {
 		do		
 			istruzione = scannerDiLinee.nextLine();
 		while (!processaIstruzione(istruzione));
-	}   
+	}
+	
+	public void prendi(String attrezzo) {
+		if(attrezzo!= null && partita.labirinto.getStanzaCorrente().hasAttrezzo(attrezzo)) {
+			Attrezzo a=partita.labirinto.getStanzaCorrente().getAttrezzo(attrezzo);
+			partita.labirinto.getStanzaCorrente().removeAttrezzo(attrezzo);
+			partita.giocatore.borsa.addAttrezzo(a);
+			System.out.println("Ho preso l'attrezzo "+ a.getNome());
+		}
+		else {
+			System.out.println("Non ho preso niente perche non è presente quell'attrezzo nella stanza");
+		}
+	}
+	
+	public void posa(String attrezzo) {
+		if(attrezzo!=null && partita.giocatore.borsa.hasAttrezzo(attrezzo)) {
+			Attrezzo a= partita.giocatore.borsa.getAttrezzo(attrezzo);
+			partita.giocatore.borsa.removeAttrezzo(attrezzo);
+			partita.labirinto.getStanzaCorrente().addAttrezzo(a);
+			System.out.println("Ho posato l'attrezzo"+ a.getNome());
+		}
+		else {
+			System.out.println("Non ho posato niente perche non è presente quell'attrezzo in borsa");
+		}
+	}
 
 
 	/**
@@ -61,6 +85,10 @@ public class DiaDia {
 			this.vai(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
+		else if (comandoDaEseguire.getNome().equals("prendi"))
+			this.prendi(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("posa"))
+			this.posa(comandoDaEseguire.getParametro());
 		else
 			System.out.println("Comando sconosciuto");
 		if (this.partita.vinta()) {
@@ -89,15 +117,15 @@ public class DiaDia {
 		if(direzione==null)
 			System.out.println("Dove vuoi andare ?");
 		Stanza prossimaStanza = null;
-		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
+		prossimaStanza = this.partita.labirinto.getStanzaCorrente().getStanzaAdiacente(direzione);
 		if (prossimaStanza == null)
 			System.out.println("Direzione inesistente");
 		else {
-			this.partita.setStanzaCorrente(prossimaStanza);
-			int cfu = this.partita.getCfu();
-			this.partita.setCfu(cfu--);
+			this.partita.labirinto.setStanzaCorrente(prossimaStanza);
+			int cfu = this.partita.giocatore.getCfu();
+			this.partita.giocatore.setCfu(cfu);
 		}
-		System.out.println(partita.getStanzaCorrente().getDescrizione());
+		System.out.println(partita.labirinto.getStanzaCorrente().getDescrizione());
 	}
 
 	/**

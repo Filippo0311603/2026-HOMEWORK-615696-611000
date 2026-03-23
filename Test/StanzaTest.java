@@ -28,7 +28,7 @@ public class StanzaTest {
 	@Test
 	public void test3() {
 		assertEquals(4,s1.getNumeroAttrezzi());
-		boolean b2=s1.removeAttrezzo(a1);
+		boolean b2=s1.removeAttrezzo(a1.getNome());
 		assertEquals(3,s1.getNumeroAttrezzi());
 	}
 
