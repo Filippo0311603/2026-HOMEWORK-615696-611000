@@ -26,9 +26,9 @@ public class LabirintoTest {
 	
 	@Test
 	public void testSetStanzaVincente() {
-		p.labirinto.setStanzaCorrente(p.labirinto.getStanzaVincente());
+		p.getLabirinto().setStanzaCorrente(p.getLabirinto().getStanzaVincente());
 		assertTrue(p.isFinita());
-		assertEquals("Biblioteca",p.labirinto.getStanzaCorrente().getNome());
+		assertEquals("Biblioteca",p.getLabirinto().getStanzaCorrente().getNome());
 		
 	}
 	

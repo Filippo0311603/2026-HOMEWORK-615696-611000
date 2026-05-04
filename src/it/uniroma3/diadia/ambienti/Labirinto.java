@@ -3,7 +3,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Labirinto {
 	
-	private Stanza stanzaCorrente;
+	public Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
 	
 	public Labirinto() {

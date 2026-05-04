@@ -14,21 +14,21 @@ public class PartitaTest {
 	
 	@Test
 	public void testVinta() {
-		p.labirinto.setStanzaCorrente(p.labirinto.getStanzaVincente());
+		p.getLabirinto().setStanzaCorrente(p.getLabirinto().getStanzaVincente());
 		assertTrue(p.isFinita());
 		
 	}
 	
 	@Test
 	public void testNonVinta() {
-		p.labirinto.setStanzaCorrente(atrio);
+		p.getLabirinto().setStanzaCorrente(atrio);
 		assertFalse(p.isFinita());
 		
 	}
 	
 	@Test
 	public void testIsFinita() {
-		p.giocatore.setCfu(0);
+		p.getGiocatore().setCfu(0);
 		assertTrue(p.isFinita());
 	}
 	

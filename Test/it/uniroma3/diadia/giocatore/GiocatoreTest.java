@@ -14,13 +14,13 @@ public class GiocatoreTest {
 	
 	@Test
 	public void testAttrezzoAggiunto() {
-		g.borsa.addAttrezzo(a);
-		assertTrue(g.borsa.hasAttrezzo("spada"));
+		g.getBorsa().addAttrezzo(a);
+		assertTrue(g.getBorsa().hasAttrezzo("spada"));
 	}
 	
 	@Test
 	public void testGiocatoreVincePartita() {
-		p.giocatore.setCfu(0);
+		p.getGiocatore().setCfu(0);
 		assertTrue(p.isFinita());
 	}
 	
