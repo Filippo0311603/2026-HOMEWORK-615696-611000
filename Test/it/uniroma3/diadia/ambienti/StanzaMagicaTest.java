@@ -2,6 +2,10 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
@@ -22,10 +26,7 @@ class StanzaMagicaTest {
 		magica.addAttrezzo(b);
 		magica.addAttrezzo(c);
 		magica.addAttrezzo(d);
-		Attrezzo[] attrezzi=magica.getAttrezzi();
-		//for(int i=0;i<attrezzi.length;i++) {
-			//System.out.println(attrezzi[i].getNome());
-		//}
+		
 		assertEquals("oducs",magica.getAttrezzo("oducs").getNome());
 		assertEquals(4,magica.getAttrezzo("oducs").getPeso());
 		
