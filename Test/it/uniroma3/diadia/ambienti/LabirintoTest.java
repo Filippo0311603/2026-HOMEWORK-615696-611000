@@ -4,23 +4,27 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import it.uniroma3.diadia.LabirintoBuilder;
 import it.uniroma3.diadia.Partita;
 
 public class LabirintoTest {
 	
-	Labirinto l= new Labirinto();
-	Stanza aulaN11 = new Stanza("Aula N11");
-	Stanza aulaN10 = new Stanza("Aula N10");
-	Stanza laboratorio = new Stanza("Laboratorio Campus");
+	Labirinto labirinto = new LabirintoBuilder()
+			.addStanzaIniziale("LabCampusOne")
+			.addStanzaVincente("Biblioteca")
+			.addAdiacenza("LabCampusOne","Biblioteca","sud")
+			.getLabirinto(); 
+	
+	Stanza laboratorio = new Stanza("LabCampusOne");
 	Stanza biblioteca = new Stanza("Biblioteca");
 	
-	Partita p =new Partita();
+	Partita p =new Partita(labirinto);
 	
 	@Test
 	public void testSetStanzaCorrente() {
-		assertEquals("Atrio",l.getStanzaCorrente().getNome());
-		l.setStanzaCorrente(laboratorio);
-		assertEquals("Laboratorio Campus",l.getStanzaCorrente().getNome());
+		assertEquals("LabCampusOne",labirinto.getStanzaCorrente().getNome());
+		labirinto.setStanzaCorrente(biblioteca);
+		assertEquals("Biblioteca",labirinto.getStanzaCorrente().getNome());
 		
 	}
 	
@@ -34,8 +38,8 @@ public class LabirintoTest {
 	
 	@Test
 	public void testStanzaAdiacente() {
-		l.getStanzaCorrente().impostaStanzaAdiacente("sud", biblioteca);
-		assertEquals(biblioteca,l.getStanzaCorrente().getStanzaAdiacente("sud"));
+		labirinto.getStanzaCorrente().impostaStanzaAdiacente("sud", biblioteca);
+		assertEquals(biblioteca,labirinto.getStanzaCorrente().getStanzaAdiacente("sud"));
 	}
 	
 	

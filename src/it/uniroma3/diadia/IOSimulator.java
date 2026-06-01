@@ -1,36 +1,38 @@
 package it.uniroma3.diadia;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class IOSimulator implements IO {
 
-	private String[] righeDaLeggere; 
+	private Map<Integer,String> righeDaLeggere; 
 	private int indiceRigaLetta;     
 	
-	private String[] messaggiMostrati; 
+	private Map<Integer,String> messaggiMostrati; 
 	private int indiceMessaggioMostrato; 
 
-	public IOSimulator(String[] righeDaLeggere) {
+	public IOSimulator(Map<Integer,String> righeDaLeggere) {
 		this.righeDaLeggere = righeDaLeggere;
 		this.indiceRigaLetta = 0;
-		this.messaggiMostrati = new String[1000];
+		this.messaggiMostrati = new HashMap<Integer,String>();
 		this.indiceMessaggioMostrato = 0;
 	}
 
 	@Override
 	public void mostraMessaggio(String msg) {
-		this.messaggiMostrati[this.indiceMessaggioMostrato] = msg;
+		this.messaggiMostrati.put(this.indiceMessaggioMostrato,msg);
 		this.indiceMessaggioMostrato++;
 	}
 
 	@Override
 	public String leggiRiga() {
-		String riga = this.righeDaLeggere[this.indiceRigaLetta];
+		String riga = this.righeDaLeggere.get(this.indiceRigaLetta);
 		this.indiceRigaLetta++;
 		return riga;
 	}
 	
 	
-	public String[] getMessaggiMostrati() {
+	public Map<Integer,String> getMessaggiMostrati() {
 		return this.messaggiMostrati;
 	}
 }

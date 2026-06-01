@@ -41,7 +41,7 @@ public class DiaDia {
 	
 
 	public DiaDia(Labirinto lab,IO io) {
-		this.partita = new Partita();
+		this.partita = new Partita(lab);
 		this.io=io;
 	}
 
@@ -147,9 +147,9 @@ public class DiaDia {
 		di cui sia ammessa la creazione */
 		IO io = new IOConsole();
 		Labirinto labirinto = new LabirintoBuilder()
-		.addStanzaIniziale(“LabCampusOne”)
-		.addStanzaVincente(“Biblioteca”)
-		.addAdiacenza(“LabCampusOne”,“Biblioteca”,”ovest”)
+		.addStanzaIniziale("LabCampusOne")
+		.addStanzaVincente("Biblioteca")
+		.addAdiacenza("LabCampusOne","Biblioteca","ovest")
 		.getLabirinto();
 		DiaDia gioco = new DiaDia(labirinto, io);
 		gioco.gioca();

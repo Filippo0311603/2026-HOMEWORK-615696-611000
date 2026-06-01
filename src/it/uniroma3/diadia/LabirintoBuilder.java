@@ -34,7 +34,9 @@ public class LabirintoBuilder {
 
     public LabirintoBuilder addStanzaIniziale(String nome) {
         this.addStanza(nome);
+        
         this.labirinto.setStanzaIniziale(this.nome2stanza.get(nome));
+        this.labirinto.setStanzaCorrente(this.nome2stanza.get(nome));
         return this;
     }
 

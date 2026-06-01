@@ -3,9 +3,10 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoGuarda implements Comando {
+public class ComandoGuarda extends AbstractComando {
 	private static IOConsole io=new IOConsole();
 	String guarda = "guarda";
+	
 	@Override
 	public void esegui(Partita partita) {
 		// TODO Auto-generated method stub
@@ -13,11 +14,7 @@ public class ComandoGuarda implements Comando {
 		io.mostraMessaggio("Partita vinta:"+this.vintaONo(partita)+ "\nCFU totali giocatore:"+ partita.getGiocatore().getCfu());
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
-
-	}
+	
 	
 	public String vintaONo(Partita partita) {
 		if(partita.isFinita()) {
@@ -36,10 +33,5 @@ public class ComandoGuarda implements Comando {
 		return this.guarda;
 	}
 
-	@Override
-	public String getParametro() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

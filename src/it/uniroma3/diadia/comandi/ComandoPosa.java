@@ -4,7 +4,7 @@ import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando {
 	private static IOConsole io=new IOConsole();
 	private String attrezzoDaPosare;
 	String posa = "posa";

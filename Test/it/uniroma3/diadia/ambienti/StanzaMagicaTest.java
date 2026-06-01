@@ -8,12 +8,18 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.LabirintoBuilder;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaMagicaTest {
 	StanzaMagica magica=new StanzaMagica("Magica");
-	Partita p= new Partita();
+	Labirinto labirinto = new LabirintoBuilder()
+			.addStanzaIniziale("LabCampusOne")
+			.addStanzaVincente("Biblioteca")
+			.addAdiacenza("LabCampusOne","Biblioteca","sud")
+			.getLabirinto(); 
+	Partita p= new Partita(labirinto);
 	Attrezzo a = new Attrezzo("ascia",4);
 	Attrezzo b = new Attrezzo("spada",4);
 	Attrezzo c= new Attrezzo("coltello",2);

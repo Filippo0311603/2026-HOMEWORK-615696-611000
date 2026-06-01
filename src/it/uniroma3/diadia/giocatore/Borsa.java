@@ -40,7 +40,7 @@ public class Borsa {
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = this.attrezzi.get(nomeAttrezzo);
 		if(a==null) {
-			throw new NullPointerException();
+			return null;
 		}
 		return a;
 	}

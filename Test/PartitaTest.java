@@ -7,8 +7,9 @@ import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
-	Partita p = new Partita();
+	
 	Labirinto l= new Labirinto();
+	Partita p = new Partita(l);
 	Stanza atrio = new Stanza("Atrio");
 	Stanza biblioteca = new Stanza("Biblioteca");
 	

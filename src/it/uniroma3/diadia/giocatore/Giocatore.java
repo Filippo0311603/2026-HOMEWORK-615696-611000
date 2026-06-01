@@ -6,9 +6,11 @@ public class Giocatore {
 	static final private int CFU_INIZIALI = 20;
 	private int cfu;
 	
+	
 	public Giocatore() {
 		this.cfu = CFU_INIZIALI;
 		this.borsa=new Borsa();
+		
 	}
 	
 	
@@ -22,4 +24,6 @@ public class Giocatore {
 	public Borsa getBorsa() {
 		return this.borsa;
 	}
+	
+	
 }

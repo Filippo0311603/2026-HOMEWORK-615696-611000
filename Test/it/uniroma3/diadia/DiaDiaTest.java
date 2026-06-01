@@ -2,7 +2,12 @@ package it.uniroma3.diadia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
+
+import it.uniroma3.diadia.ambienti.Labirinto;
 
 class DiaDiaTest {
 	
@@ -11,18 +16,30 @@ class DiaDiaTest {
 	
 	@Test
 	void testVittoria() {
-		String[] comandi= {"vai nord"};
+		Map<Integer,String> comandi= new HashMap<Integer,String>();
+		comandi.put(0,"vai nord");
 		IOSimulator io= new IOSimulator(comandi);
-		DiaDia d = new DiaDia(io);
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("LabCampusOne")
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("LabCampusOne","Biblioteca","nord")
+				.getLabirinto(); 
+		DiaDia d = new DiaDia(labirinto,io);
 		d.gioca();
 		assertTrue(d.getPartita().vinta());
 	}
-	
+//	
 	@Test
 	void testPersa() {
-		String[] comandi= {"vai sud"};
+		Map<Integer,String> comandi= new HashMap<Integer,String>();
+		comandi.put(0,"vai sud");
 		IOSimulator io= new IOSimulator(comandi);
-		DiaDia d = new DiaDia(io);
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("LabCampusOne")
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("LabCampusOne","Biblioteca","sud")
+				.getLabirinto(); 
+		DiaDia d = new DiaDia(labirinto,io);
 		d.getPartita().getGiocatore().setCfu(1);
 		d.gioca();
 		assertFalse(d.getPartita().giocatoreIsVivo());
@@ -30,9 +47,16 @@ class DiaDiaTest {
 	
 	@Test
 	void testFinita() {
-		String[] comandi= {"vai sud","fine"};
+		Map<Integer,String> comandi= new HashMap<Integer,String>();
+		comandi.put(0,"vai sud");
+		comandi.put(1,"fine");
 		IOSimulator io= new IOSimulator(comandi);
-		DiaDia d = new DiaDia(io);
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("LabCampusOne")
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("LabCampusOne","Biblioteca","nord")
+				.getLabirinto(); 
+		DiaDia d = new DiaDia(labirinto,io);
 		d.gioca();
 		assertTrue(d.getPartita().isFinita());
 	}
