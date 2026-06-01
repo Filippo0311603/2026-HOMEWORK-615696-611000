@@ -3,8 +3,12 @@ package it.uniroma3.diadia.giocatore;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -75,6 +79,28 @@ public class BorsaTest {
 		assertEquals(a,g.next());
 		
 		
+		
+	}
+	
+	@Test
+	public void TestGetContenutoRaggruppatoPerPeso() {
+		Attrezzo f=new Attrezzo("libro",5);
+		Attrezzo g=new Attrezzo("ps",5);
+		Attrezzo h=new Attrezzo("piuma",4);
+		Borsa b=new Borsa(30);
+		b.addAttrezzo(f);
+		b.addAttrezzo(g);
+		b.addAttrezzo(h);
+		Map<Integer,Set<Attrezzo>> ord=new HashMap<Integer,Set<Attrezzo>>();
+		ord=b.getContenutoRaggruppatoPerPeso();
+		Set<Attrezzo> set= new HashSet<Attrezzo>();
+		set.add(f);
+		set.add(g);
+		Set<Attrezzo> set2= new HashSet<Attrezzo>();
+		set2.add(h);
+		
+		assertEquals(ord.get(f.getPeso()),set);
+		assertEquals(ord.get(h.getPeso()),set2);
 		
 	}
 	

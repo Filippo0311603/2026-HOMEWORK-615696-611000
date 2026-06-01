@@ -109,4 +109,22 @@ public class Borsa {
 		
 		
 	}
+	
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		
+		Map<Integer,Set<Attrezzo>> mappa= new HashMap<Integer,Set<Attrezzo>>();
+		for(Attrezzo a: this.attrezzi.values()) {
+			if(a!=null) {
+				if(mappa.containsKey(a.getPeso())) {
+					mappa.get(a.getPeso()).add(a);
+				}
+				else {
+					Set<Attrezzo> set= new HashSet<Attrezzo>();
+					set.add(a);
+					mappa.put(a.getPeso(),set);
+				}
+			}
+		}
+		return mappa;
+	}
 }
