@@ -1,13 +1,20 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPrendi extends AbstractComando {
-	private static IOConsole io=new IOConsole();
+	private IO io;
 	String prendi = "prendi";
 	private String attrezzoDaPrendere;
+	
+	@Override
+    public void setIo(IO io) {
+        this.io = io;
+    }
+	
 	@Override
 	public void esegui(Partita partita) {
 		// TODO Auto-generated method stub

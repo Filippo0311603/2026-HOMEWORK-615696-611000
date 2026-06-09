@@ -15,6 +15,11 @@ public class ComandoInteragisci extends AbstractComando {
 	String interagisci = "interagisci";
 	
 	@Override
+    public void setIo(IO io) {
+        this.io = io;
+    }
+	
+	@Override
 	public void esegui(Partita partita) {
 		AbstractPersonaggio personaggio;
 		personaggio = partita.getStanzaCorrente().getPersonaggio();

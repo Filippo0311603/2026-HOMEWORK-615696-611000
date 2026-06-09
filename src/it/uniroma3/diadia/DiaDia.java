@@ -37,7 +37,7 @@ public class DiaDia {
 	
 
 	private Partita partita;
-	private static IO io;
+	private IO io;
 	
 
 	public DiaDia(Labirinto lab,IO io) {
@@ -87,35 +87,27 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire;
-		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
-		comandoDaEseguire = factory.costruisciComando(istruzione);
-		comandoDaEseguire.esegui(this.partita);
-		if (this.partita.vinta())
+	    Comando comandoDaEseguire;
+	    FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
+	    
+	    comandoDaEseguire = factory.costruisciComando(istruzione);
+	    
+	    // AGGIUNGI QUESTA RIGA: passa l'IO al comando appena creato
+	    comandoDaEseguire.setIo(this.io);
+	    
+	    comandoDaEseguire.esegui(this.partita);
+	    
+	    if (this.partita.vinta())
+	        this.io.mostraMessaggio("Hai vinto!");
+	    
+	    if (!this.partita.giocatoreIsVivo())
+	        this.io.mostraMessaggio("Hai esaurito i CFU...");
 
-		io.mostraMessaggio("Hai vinto!");
-		if (!this.partita.giocatoreIsVivo())
+	    return this.partita.isFinita();
+	}
 
-			io.mostraMessaggio("Hai esaurito i CFU...");
-
-		return this.partita.isFinita();
-		}   
-
-	// implementazioni dei comandi dell'utente:
-
-	/**
-	 * Stampa informazioni di aiuto.
-	 */
-	/*private void aiuto() {
-		for(int i=0; i< elencoComandi.length; i++) 
-			io.mostraMessaggio(elencoComandi[i]+" ");
-		System.out.println();
-	}*/
-
-	/**
-	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
-	 * e ne stampa il nome, altrimenti stampa un messaggio di errore
-	 */
+	
+	
 	private void vai(String direzione) {
 		if(direzione==null)
 			io.mostraMessaggio("Dove vuoi andare ?");
@@ -143,15 +135,24 @@ public class DiaDia {
 	}
 
 	public static void main(String[] argc) {
-		/* N.B. unica istanza di IOConsole
-		di cui sia ammessa la creazione */
-		IO io = new IOConsole();
-		Labirinto labirinto = new LabirintoBuilder()
-		.addStanzaIniziale("LabCampusOne")
-		.addStanzaVincente("Biblioteca")
-		.addAdiacenza("LabCampusOne","Biblioteca","ovest")
-		.getLabirinto();
-		DiaDia gioco = new DiaDia(labirinto, io);
-		gioco.gioca();
+	    
+	    try (Scanner scannerDiLinee = new Scanner(System.in)) {
+	        
+	     
+	        IO io = new IOConsole(scannerDiLinee);
+	        
+	        Labirinto labirinto = new LabirintoBuilder()
+	        	    .addStanzaIniziale("LabCampusOne")
+	        	    .addStanzaVincente("Biblioteca")
+	        	    .addStanza("Aula N11")
+	        	    .addStanza("Bar")
+	        	    .addAdiacenza("LabCampusOne", "Biblioteca", "ovest")
+	        	    .addAdiacenza("LabCampusOne", "Aula N11", "nord")
+	        	    .addAdiacenza("LabCampusOne", "Bar", "est")
+	        	    .getLabirinto();
+	        DiaDia gioco = new DiaDia(labirinto, io);
+	        gioco.gioca();
+	        
+	    } // Qui Java chiama in automatico scannerDiLinee.close()
 	}
 }

@@ -1,10 +1,16 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoNonValido extends AbstractComando {
-	private static IOConsole io=new IOConsole();
+	private IO io;
+	
+	@Override
+    public void setIo(IO io) {
+        this.io = io;
+    }
 	
 	@Override
 	public void esegui(Partita partita) {

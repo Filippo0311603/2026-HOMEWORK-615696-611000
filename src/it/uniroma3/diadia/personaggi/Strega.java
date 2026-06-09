@@ -3,6 +3,7 @@ package it.uniroma3.diadia.personaggi;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 public class Strega extends AbstractPersonaggio{
 
@@ -11,8 +12,14 @@ public class Strega extends AbstractPersonaggio{
 			"con meno attrezzi!";
 	private static final String MESSAGGIO_SE_SALUTA = "Oh, sarò buona, andrai in una stanza con più attrezzi...";
 	
-	public Strega(String nome, String presentazione) {
+	private static final String MESSAGGIO_REGALO="Ah ah ah ah";
+	
+	private Borsa b;
+	
+	public Strega(String nome, String presentazione, Borsa borsa) {
 		super(nome, presentazione);
+		this.b=borsa;
+		
 		
 	}
 	@Override
@@ -48,4 +55,10 @@ public class Strega extends AbstractPersonaggio{
 		
 		
 }
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		
+		b.addAttrezzo(attrezzo);
+		return MESSAGGIO_REGALO;
+	}
 }

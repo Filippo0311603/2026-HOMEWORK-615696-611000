@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -7,12 +8,14 @@ import it.uniroma3.diadia.ambienti.Stanza;
 public class ComandoVai extends AbstractComando {
 	private String direzione;
 
-	private static IOConsole io=new IOConsole();
+	private IO io;
 	String vai = "vai";
 
-	/**
-	 * esecuzione del comando
-	 */
+	@Override
+    public void setIo(IO io) {
+        this.io = io;
+    }
+	
 	@Override
 	public void esegui(Partita partita) {
 		Stanza stanzaCorrente= partita.getStanzaCorrente();

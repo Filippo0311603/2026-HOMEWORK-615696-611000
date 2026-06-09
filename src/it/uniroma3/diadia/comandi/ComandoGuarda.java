@@ -1,10 +1,11 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoGuarda extends AbstractComando {
-	private static IOConsole io=new IOConsole();
+	private IO io;
 	String guarda = "guarda";
 	
 	@Override
@@ -14,7 +15,10 @@ public class ComandoGuarda extends AbstractComando {
 		io.mostraMessaggio("Partita vinta:"+this.vintaONo(partita)+ "\nCFU totali giocatore:"+ partita.getGiocatore().getCfu());
 	}
 
-	
+	@Override
+    public void setIo(IO io) {
+        this.io = io;
+    }
 	
 	public String vintaONo(Partita partita) {
 		if(partita.isFinita()) {
